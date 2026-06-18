@@ -90,11 +90,14 @@ export default function MapReportPage() {
     return title;
   };
 
+  
+  const apiUrl = import.meta.env.VITE_API_URL || '/api'
+
   useEffect(() => {
     const fetchMapPageData = async () => {
       try {
         setLoading(true);
-        const authResponse = await fetch("/api/auth/me", {
+        const authResponse = await fetch(`${apiUrl}/auth/me`, {
           method: "GET",
           credentials: "include",
         });

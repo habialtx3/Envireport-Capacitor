@@ -40,8 +40,11 @@ export default function RegisterPage() {
 
     setLoading(true);
 
+    
+  const apiUrl = import.meta.env.VITE_API_URL || '/api'
+
     try {
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/auth/register`, {
+      const response = await fetch(`${apiUrl}/auth/register`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -13,11 +13,14 @@ export default function UserReportsPage() {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 5;
 
+  
+  const apiUrl = import.meta.env.VITE_API_URL || '/api'
+
   const fetchUserReports = async () => {
     setIsLoading(true);
     try {
       // 2. Ambil data sesi user dari API Me
-      const authResponse = await fetch("/api/auth/me", {
+      const authResponse = await fetch(`${apiUrl}/auth/me`, {
         method: "GET",
         credentials: "include",
       });

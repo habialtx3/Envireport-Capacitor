@@ -33,11 +33,13 @@ export default function AdminReportDetailPage() {
     fetchReportDetail();
   }, [id]);
 
+   const apiUrl = import.meta.env.VITE_API_URL || '/api'
+   
   // FETCH DETAIL MENGGUNAKAN SERVICE AGAR URL-NYA SAMA PERSIS DENGAN BRUNO
   const fetchReportDetail = async () => {
     setIsLoading(true);
     try {
-      const response = await fetch(`/api/reports/${id}`);
+      const response = await fetch(`${apiUrl}/api/reports/${id}`);
       const responseJson = await response.json();
       
       if (responseJson.success) {

@@ -5,20 +5,27 @@ export default function Sidebar() {
   const [isLoggingOut, setIsLoggingOut] = useState(false);
   const navigate = useNavigate();
 
+  const apiUrl = import.meta.env.VITE_API_URL || "/api";
+
   // Handler fungsi untuk Logout Admin
   const handleLogout = async () => {
-    const konfirmasi = window.confirm("Apakah Anda yakin ingin keluar dari panel Admin?");
+    const konfirmasi = window.confirm(
+      "Apakah Anda yakin ingin keluar dari panel Admin?",
+    );
     if (!konfirmasi) return;
 
     setIsLoggingOut(true);
     try {
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/auth/logout`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
+      const response = await fetch(
+        `${apiUrl}/auth/logout`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          credentials: "include", // PENTING: Supaya cookie terhapus
         },
-        credentials: "include", // PENTING: Supaya cookie terhapus
-      });
+      );
 
       if (response.ok) {
         navigate("/login");
@@ -38,7 +45,7 @@ export default function Sidebar() {
     `flex items-center gap-3 px-4 py-3 rounded-2xl transition-all duration-200 ${
       isActive
         ? "bg-[#eef9f0] text-[#51a750] font-semibold" // Style saat halaman aktif
-        : "text-gray-600 hover:bg-[#f5faf6]"          // Style saat halaman tidak aktif
+        : "text-gray-600 hover:bg-[#f5faf6]" // Style saat halaman tidak aktif
     }`;
 
   return (
@@ -83,7 +90,8 @@ export default function Sidebar() {
             </p>
 
             <NavLink to="/admin/user-management" className={linkStyle}>
-              <span>👥</span> {/* Sedikit perbaikan emoji agar lebih cocok dengan User */}
+              <span>👥</span>{" "}
+              {/* Sedikit perbaikan emoji agar lebih cocok dengan User */}
               User Management
             </NavLink>
           </div>

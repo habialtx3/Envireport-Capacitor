@@ -6,6 +6,9 @@ export default function Navbar({ variant = "public" }) {
   const [isLoggingOut, setIsLoggingOut] = useState(false);
   const navigate = useNavigate();
 
+  const apiUrl = import.meta.env.VITE_API_URL || "/api";
+  
+
   // Handler fungsi untuk Logout
   const handleLogout = async () => {
     const konfirmasi = window.confirm("Apakah Anda yakin ingin keluar?");
@@ -13,7 +16,7 @@ export default function Navbar({ variant = "public" }) {
 
     setIsLoggingOut(true);
     try {
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/auth/logout`, {
+      const response = await fetch(`${apiUrl}/auth/logout`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

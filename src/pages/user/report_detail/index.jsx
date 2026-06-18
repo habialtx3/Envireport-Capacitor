@@ -15,8 +15,11 @@ export default function ReportDetailPage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedImg, setSelectedImg] = useState("");
 
+  
+  const apiUrl = import.meta.env.VITE_API_URL || '/api'
+
   useEffect(() => {
-    fetch(`${import.meta.env.VITE_API_URL}/reports/${id}`)
+    fetch(`${apiUrl}/reports/${id}`)
       .then((res) => res.json())
       .then((responseJson) => {
         if (responseJson.success) {

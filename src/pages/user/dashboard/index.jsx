@@ -7,11 +7,13 @@ export default function UserDashboardPage() {
   const [reports, setReports] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
+  const apiUrl = import.meta.env.VITE_API_URL || '/api'
+
   useEffect(() => {
     const fetchDashboardData = async () => {
       try {
         // 1. Ambil data user yang sedang login saat ini dari API Me
-        const authResponse = await fetch("/api/auth/me", {
+        const authResponse = await fetch(`${apiUrl}/auth/me`, {
           method: "GET",
           credentials: "include", // Wajib agar cookie token ikut terkirim
         });

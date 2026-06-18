@@ -73,9 +73,12 @@ export default function ReportSubmissionPage() {
     }
   }
 
+  
+  const apiUrl = import.meta.env.VITE_API_URL || '/api'
+
   try {
     const response = await fetch(
-      `${import.meta.env.VITE_API_URL}/reports`,
+      `${apiUrl}/reports`,
       {
         method: "POST",
         headers: {

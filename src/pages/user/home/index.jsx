@@ -7,11 +7,14 @@ export default function Home() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isLoadingAuth, setIsLoadingAuth] = useState(true);
 
+  
+  const apiUrl = import.meta.env.VITE_API_URL || '/api'
+  
   useEffect(() => {
     const checkLoginStatus = async () => {
       try {
         // Menembak endpoint auth/me bawaan sistem kamu dengan credentials include
-        const response = await fetch(`${import.meta.env.VITE_API_URL}/auth/me`, {
+        const response = await fetch(`${apiUrl}/auth/me`, {
           method: "GET",
           credentials: "include", // Wajib agar cookie token ikut terkirim ke backend
         });
