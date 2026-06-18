@@ -3,7 +3,7 @@ name: Build Android APK
 on:
   push:
     branches:
-      - main # <-- Ubah ke 'master' jika nama branch utama GitHub kamu adalah master
+      - main # <-- Pastikan ini sesuai nama branch kamu (main/master)
 
 jobs:
   build:
@@ -16,8 +16,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-size: 20
-          node-version: 20
+          node-version: '22' # Menggunakan Node versi terbaru biar gak error
           cache: 'npm'
 
       - name: Install Java
@@ -27,10 +26,16 @@ jobs:
           java-version: '17'
 
       - name: Install Dependencies
-        run: npm ci
+        run: npm install # Menggunakan install biasa agar lebih aman
 
       - name: Build Web App (Vite)
         run: npm run build
+
+      - name: Add Android Platform if not exists
+        run: |
+          if [ ! -d "android" ]; then
+            npx cap add android
+          fi
 
       - name: Sync Capacitor Android
         run: npx cap sync android
